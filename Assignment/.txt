@@ -1,0 +1,69 @@
+Solving a Real-World Problem Using Reinforcement Learning
+
+Overview
+This lab exercise applies reinforcement learning—specifically Q-learning—to address a real-world-inspired control task. Students will use a publicly available environment to train an RL agent, assess its performance, and optimise it for robust behaviour.
+
+Problem Statement: Warehouse Robot on a Slippery Floor
+Students will develop a warehouse floor robot that must navigate from a loading bay to a target shelf without falling into hazards (holes) and while dealing with a slippery surface. Because the robot’s movement can slip unpredictably, it needs to learn a safe, efficient route instead of relying on fixed plans.
+
+This exercise uses the FrozenLake-v1 environment (Gym), which models a slippery warehouse floor as a grid with safe tiles, holes (hazards), a start point, and a goal. The agent must learn a policy that maximizes success rate and minimizes steps under stochastic transitions.
+
+Dataset / Environment:
+• Environment: FrozenLake-v1 (4×4 or 8×8 map; “slippery=True” to induce stochastic motion).
+• Observation space (state): a discrete tile index (grid cell).
+• Action space: {Left, Down, Right, Up}.
+• Rewards: Reaching the goal yields +1; falling into a hole yields 0 (episode terminates). Stepping on safe tiles yields 0 (sparse reward).
+• Real-world analogy: Autonomous robot navigating a slick warehouse aisle with spill zones (holes) to reach a pick location (goal).
+
+Environment Description:
+• Grid size: 6×6 (default) or 8×8 for a harder variant.
+• Start/Goal: Fixed start at “S” and target shelf at “G”.
+• Hazards: “H” tiles represent spill pits; entering them ends the episode.
+• Stochasticity: On a slippery floor, intended actions may slip to adjacent directions, modeling real-world uncertainty (wheels slipping, micro-surface variation).
+
+Tasks:
+1. Understanding the Environment:
+• Instantiate FrozenLake-v1 and print state and action spaces.
+• Visualize the grid and annotate S (start), G (goal), and H (holes).
+• Explain the reward structure and the effect of slippery=True.
+
+2. Setting Up the RL Agent:
+• Implement tabular Q-learning with a Q-table of size [n_states × n_actions].
+• Use ε-greedy exploration (ε decay), learning rate α, discount factor γ.
+• Initialize Q(s, a) = 0 for all feasible state–action pairs.
+
+3. Training the RL Agent:
+• Train over many episodes (e.g., 10k+) to handle sparse rewards and slippage.
+• Tune α, γ, ε schedule; track episode returns and success rate.
+• Consider separate runs for 6×6 vs 8×8 maps to compare difficulty.
+
+4. Evaluation:
+• Report success rate (fraction of episodes reaching the goal).
+• Plot cumulative reward per episode and a moving average.
+• Compare against:
+o Random policy baseline.
+o Simple heuristic (e.g., always attempt a shortest deterministic route) to show why planning fails on slippery floors.
+
+5. Optimization:
+• Experiment with:
+o ε schedules (linear vs exponential decay),
+o γ (myopic vs far-sighted),
+o α (stability vs speed).
+• Optional algorithmic variants: SARSA (on-policy), Double Q-learning (reduces overestimation).
+• Optional shaping: small step penalty (−0.01) to encourage shorter paths (discuss pros/cons).
+
+6. Reporting:
+• Document your approach, design decisions (hyperparameters, ε schedule), and training curves.
+• Discuss challenges: sparse rewards and stochastic transitions.
+• Note potential improvements: larger Q-tables (8×8), eligibility traces, or moving to function approximation (DQN) if you later convert observations to rich features (optional).
+
+Deliverables:
+• Code: Python notebook/script with Q-learning implementation, training loop, evaluation, and plots. Include a README with setup steps and run instructions.
+• Report: Brief write-up describing the problem, method, results (plots + metrics), and conclusions/next steps.
+
+Tools and Libraries:
+• Python (3.x)
+• Gym/Gymnasium (for FrozenLake-v1)
+• NumPy (Q-table, numeric ops)
+• Matplotlib (for plotting results)
+• TensorFlow/PyTorch (optional, for more advanced RL algorithms like DQN)

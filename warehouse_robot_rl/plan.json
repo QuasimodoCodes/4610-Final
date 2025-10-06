@@ -1,0 +1,66 @@
+{
+  "project_name": "Warehouse Robot RL - FrozenLake Q-Learning",
+  "project_description": "Reinforcement learning solution using Q-learning to train a warehouse robot to navigate a slippery floor environment (implemented in a single Jupyter notebook)",
+  "steps": [
+    {
+      "step_number": 1,
+      "description": "Setup: Create requirements.txt and initialize notebook with imports and markdown overview",
+      "status": "complete"
+    },
+    {
+      "step_number": 2,
+      "description": "Environment exploration: Instantiate FrozenLake-v1, print state/action spaces, visualize grid, and explain reward structure",
+      "status": "pending"
+    },
+    {
+      "step_number": 3,
+      "description": "Q-learning agent: Implement Q-table initialization, epsilon-greedy policy selection, and hyperparameters",
+      "status": "pending"
+    },
+    {
+      "step_number": 4,
+      "description": "Training loop: Implement Q-learning update rule with episode tracking and reward accumulation",
+      "status": "pending"
+    },
+    {
+      "step_number": 5,
+      "description": "Baseline policies: Implement random policy and simple heuristic for comparison",
+      "status": "pending"
+    },
+    {
+      "step_number": 6,
+      "description": "Train Q-learning agent: Run training for 10k+ episodes on 4x4 map and log metrics",
+      "status": "pending"
+    },
+    {
+      "step_number": 7,
+      "description": "Evaluation: Calculate success rates and plot training curves with moving averages",
+      "status": "pending"
+    },
+    {
+      "step_number": 8,
+      "description": "Comparison: Evaluate baselines vs trained agent and visualize results",
+      "status": "pending"
+    },
+    {
+      "step_number": 9,
+      "description": "Hyperparameter tuning: Experiment with epsilon schedules, alpha, and gamma values",
+      "status": "pending"
+    },
+    {
+      "step_number": 10,
+      "description": "8x8 map: Train and evaluate agent on larger grid, compare difficulty",
+      "status": "pending"
+    },
+    {
+      "step_number": 11,
+      "description": "Optional: Implement SARSA or Double Q-learning for comparison",
+      "status": "pending"
+    },
+    {
+      "step_number": 12,
+      "description": "Final analysis: Generate comprehensive results, plots, and written conclusions in notebook",
+      "status": "pending"
+    }
+  ]
+}
