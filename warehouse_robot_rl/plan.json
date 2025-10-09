@@ -10,7 +10,7 @@
     {
       "step_number": 2,
       "description": "Environment exploration: Instantiate FrozenLake-v1, print state/action spaces, visualize grid, and explain reward structure",
-      "status": "pending"
+      "status": "complete"
     },
     {
       "step_number": 3,
