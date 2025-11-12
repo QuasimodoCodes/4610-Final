@@ -7,6 +7,7 @@ This project implements and analyses Particle Swarm Optimization (PSO) across cl
 
 - `pso_analysis.ipynb` — end-to-end workflow: implementation, experiments, analysis, and conclusions.
 - `results/` — exported artefacts (`*.csv`, `*.png`, `pso_swarm.gif`) from completed experiments.
+- `requirements.txt` — minimal dependency list for reproducing the notebook.
 
 ## Quick Start
 
