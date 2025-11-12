@@ -1,12 +1,12 @@
 # Particle Swarm Optimization Benchmarking
 
 This project implements and analyses Particle Swarm Optimization (PSO) across classic continuous benchmark functions. All code, experiments, visualisations, and commentary live in `pso_analysis.ipynb`.
-![PSO on the 2D Sphere function GIF](pso_swarm_sphere_2d_run1.gif)
+![PSO on the 2D Sphere function GIF](results/pso_swarm_sphere_2d_run1.gif)
+
 ## Repository Layout
 
 - `pso_analysis.ipynb` — end-to-end workflow: implementation, experiments, analysis, and conclusions.
 - `results/` — exported artefacts (`*.csv`, `*.png`, `pso_swarm.gif`) from completed experiments.
-
 
 ## Quick Start
 
