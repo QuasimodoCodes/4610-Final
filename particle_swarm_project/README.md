@@ -1,196 +1,70 @@
-# 🐝 Particle Swarm Optimization (PSO) Project
+# Particle Swarm Optimization Benchmarking
 
-**Author:** Victor  
-**Date Started:** November 7, 2025  
-**Status:** ✅ Specification-Compliant | 🔄 Step 1.1 Complete
+This project implements and analyses Particle Swarm Optimization (PSO) across classic continuous benchmark functions. All code, experiments, visualisations, and commentary live in `pso_analysis.ipynb`.
+![PSO on the 2D Sphere function GIF](pso_swarm_sphere_2d_run1.gif)
+## Repository Layout
 
----
+- `pso_analysis.ipynb` — end-to-end workflow: implementation, experiments, analysis, and conclusions.
+- `results/` — exported artefacts (`*.csv`, `*.png`, `pso_swarm.gif`) from completed experiments.
 
-## 📁 Project Structure
 
-```
-particle_swarm_project/
-├── pso_analysis.ipynb           # Main implementation notebook
-├── plan.json                    # 5-step structured plan with progress tracking
-├── PROJECT_SPECIFICATION.md     # Master reference document (specification v1.0)
-├── COMPLIANCE_CHECK.md          # Detailed compliance verification
-├── problems_log.md              # Issue tracking and resolutions
-├── features_backlog.md          # Future enhancements and extensions
-├── README.md                    # This file
-└── results/                     # Output directory for plots, CSV, logs
-```
+## Quick Start
 
----
+1. **Create and activate a virtual environment (optional but recommended).**
+   ```powershell
+   python -m venv .venv
+   .\.venv\Scripts\Activate.ps1
+   ```
+2. **Install required packages.** The notebook relies on NumPy, Pandas, Matplotlib, and SciPy. Install the latest stable versions:
+   ```powershell
+   pip install numpy pandas matplotlib scipy tqdm
+   ```
+3. **Launch Jupyter and open the notebook.**
+   ```powershell
+   python -m jupyter lab
+   ```
+4. **Run `pso_analysis.ipynb` top-to-bottom.** Each section is self-contained; use `Kernel > Restart & Run All` to reproduce the published results.
 
-## 🎯 Project Objectives
+The experiments were executed with Python 3.10 on Windows 10. Matching these versions will avoid API differences, but any recent Python 3.9+ environment should work.
 
-Implement and analyze **Particle Swarm Optimization** for continuous optimization:
+## Notebook Roadmap
 
-1. ✅ Implement standard PSO with configurable parameters
-2. Test on 4 benchmark functions across 3 dimensionalities (2, 10, 30)
-3. Run 30 independent trials per configuration
-4. Analyze convergence, stability, and final accuracy
-5. Compare global-best vs local-best PSO variants
+- **Section 1 — Setup:** Imports, random seed configuration, and definition of four benchmark functions (Sphere, Rosenbrock, Rastrigin, Ackley) with range checks.
+- **Section 2 — PSO Implementation:** Global-best PSO with inertia weight, cognitive/social terms, velocity clamping, and reproducible RNG streams.
+- **Section 3 — Experimental Design:** Configuration of the full sweep (4 functions × 3 dimensions × 30 runs = 360 experiments) and helper utilities for data collection.
+- **Section 4 — Performance Results:** Aggregated tables, convergence curves, success-rate heatmaps, and bar charts exported to `results/`.
+- **Section 5 — Convergence Patterns:** Qualitative analysis of representative fitness trajectories.
+- **Section 6 — Stability Metrics:** Variance analysis to quantify consistency across runs.
+- **Section 7 — Conclusions:** Written synthesis of findings plus links to generated CSV/PNG artefacts.
 
----
+## Key Results
 
-## 📊 Benchmark Functions
+- **Overall throughput:** 360 experiments completed with an average runtime ≈1–2 seconds per run; raw logs are stored in `results/pso_experiments_detailed.csv`.
+- **Success by function (global optimum reached ≥ 1e-6 tolerance):**
+  - Sphere: **96.7%**
+  - Ackley: **66.7%**
+  - Rosenbrock: **33.3%**
+  - Rastrigin: **33.3%**
+- **Success by dimensionality:**
+  - 2D: **100%**
+  - 10D: **50.0%**
+  - 30D: **22.5%**
+- **Convergence behaviour:** Successful runs typically converged within 30–270 iterations; stalled runs plateaued early, especially on Rosenbrock and Rastrigin.
+- **Stability:** Sphere exhibited the lowest variance across runs, while multimodal functions showed high dispersion, underscoring the importance of multiple trials.
 
-| Function       | Search Range      | Global Min | Difficulty          |
-| -------------- | ----------------- | ---------- | ------------------- |
-| **Sphere**     | [-5.12, 5.12]     | 0          | Easy (unimodal)     |
-| **Rosenbrock** | [-2.048, 2.048]   | 0          | Medium (valley)     |
-| **Rastrigin**  | [-5.12, 5.12]     | 0          | Hard (multimodal)   |
-| **Ackley**     | [-32.768, 32.768] | 0          | Hard (flat regions) |
+Refer to `results/performance_heatmaps.png` and `results/convergence_curves_all.png` for the visual evidence supporting these metrics.
 
----
+## Reproducing the Study
 
-## ⚙️ PSO Parameters
+1. Execute Sections 1–3 to rebuild the PSO implementation and experiment scaffolding.
+2. Run the master experiment cell in Section 4; progress logs appear every dimension block, and refreshed CSV/PNG outputs land in `results/`.
+3. Use the summarisation cells in Sections 4–6 to regenerate tables, plots, and descriptive text.
+4. Review Section 7 for the automatically generated narrative summary; adjust parameters or add new benchmarks as needed.
 
-| Parameter           | Value            | Notes                            |
-| ------------------- | ---------------- | -------------------------------- |
-| **Particles**       | 30 (50 for n=30) | Swarm size                       |
-| **Iterations**      | 300              | Max budget                       |
-| **Inertia (ω)**     | 0.7              | Exploration/exploitation balance |
-| **Cognitive (c₁)**  | 1.5              | Personal best influence          |
-| **Social (c₂)**     | 1.5              | Global best influence            |
-| **Velocity Clamp**  | ±0.5 × range     | Prevents explosion               |
-| **Velocity Init**   | 10-20% of range  | Initial movement                 |
-| **Runs per config** | 30               | Statistical reliability          |
+If you only need the published artefacts, open the notebook without execution—the stored outputs reflect a full successful run.
 
----
+## Troubleshooting
 
-## 📝 Implementation Plan (plan.json)
-
-### ✅ Step 1: Initialize Project (IN PROGRESS)
-
-- ✅ **1.1** Create tracking files and specification documents
-- 🔄 **1.2** Set up Jupyter notebook with imports
-- ⏳ **1.3** Implement benchmark functions
-- ⏳ **1.4** Create results directory structure
-
-### ⏳ Step 2: Core PSO Algorithm
-
-- Particle class with position, velocity, pbest tracking
-- PSO class with swarm initialization and update rules
-- Velocity clamping and boundary handling
-- Stop criteria and iteration tracking
-- Test on 2D Sphere function
-
-### ⏳ Step 3: Run Experiments
-
-- 4 functions × 3 dimensions × 30 runs = 360 total experiments
-- Record per-iteration gbest fitness
-- Record per-run final fitness, position, evaluations
-- Save results to CSV files
-
-### ⏳ Step 4: Analysis & Visualization
-
-- Convergence curves (log-scale y-axis)
-- Summary statistics (mean, median, best, worst, std, success rate)
-- Performance comparison tables
-- Discussion of trends and patterns
-
-### ⏳ Step 5: PSO Variants Comparison
-
-- Implement local-best (lbest) PSO
-- Compare gbest vs lbest performance
-- Analyze diversity and convergence differences
-- Document findings and recommendations
-
----
-
-## 📈 Expected Deliverables
-
-1. ✅ Working PSO implementation (modular, documented)
-2. ✅ Convergence plots for all function × dimension combinations
-3. ✅ Statistical summary tables
-4. ✅ Performance analysis and discussion
-5. ✅ CSV files with raw experimental data
-6. ✅ Variant comparison (gbest vs lbest)
-
----
-
-## 🔬 Success Criteria
-
-| Criterion        | Target                                           |
-| ---------------- | ------------------------------------------------ |
-| **Correctness**  | All functions properly implemented and bounded   |
-| **Efficiency**   | ≤1 minute per run                                |
-| **Reliability**  | Consistent results across 30 runs                |
-| **Reporting**    | Clear plots, labeled results, concise discussion |
-| **Code Quality** | Readable, modular, well-documented               |
-
----
-
-## 🚀 Getting Started
-
-### 1. Open the Notebook
-
-```bash
-cd "c:\Users\Victor\Desktop\4610 Final\particle_swarm_project"
-jupyter notebook pso_analysis.ipynb
-```
-
-Or open `pso_analysis.ipynb` in VS Code.
-
-### 2. Follow the Plan
-
-Check `plan.json` for current progress and next steps.
-
-### 3. Track Issues
-
-Log any problems in `problems_log.md`.
-
-### 4. Add Ideas
-
-Record future enhancements in `features_backlog.md`.
-
----
-
-## 📚 Key Documents
-
-- **`PROJECT_SPECIFICATION.md`** — Master reference (follows specification v1.0)
-- **`COMPLIANCE_CHECK.md`** — Verification that plan aligns with specification
-- **`plan.json`** — Live progress tracking with detailed substeps
-- **`problems_log.md`** — Issue log and resolutions
-- **`features_backlog.md`** — Future improvements and parameter studies
-
----
-
-## ✅ Specification Compliance
-
-This project **fully complies** with the PSO Project Description v1.0:
-
-- ✅ All 4 benchmark functions with correct formulas and ranges
-- ✅ All experimental parameters (ω, c₁, c₂, velocity clamp, etc.)
-- ✅ Success thresholds for performance evaluation
-- ✅ 30 runs × 3 dimensions × 4 functions = 360 experiments
-- ✅ Complete statistical analysis pipeline
-- ✅ Global-best vs local-best variant comparison
-- ✅ Reproducibility through seed control
-- ✅ Comprehensive documentation and tracking
-
-See `COMPLIANCE_CHECK.md` for detailed verification.
-
----
-
-## 🔄 Current Status
-
-**Step 1.1 COMPLETE** ✅  
-**Next Action:** Begin Step 1.2 — Set up notebook with imports and configuration
-
----
-
-## 📞 Support
-
-For questions or issues:
-
-1. Check `problems_log.md` for similar issues
-2. Review `PROJECT_SPECIFICATION.md` for requirements
-3. Consult `features_backlog.md` for planned enhancements
-
----
-
-**Last Updated:** November 7, 2025  
-**Project Progress:** 1 of 20 substeps complete (5%)
+- **Long runtimes:** The complete sweep takes several minutes on a typical laptop CPU. Reduce the number of runs per configuration (e.g., 5 instead of 30) for exploratory testing, then restore to 30 for the final report.
+- **Floating-point drift:** Results rely on consistent seeding (`SeedSequence`). If you alter seeds, expect different success rates; document any changes for reproducibility.
+- **Memory usage:** Each run saves intermediate fitness history. Delete large CSVs in `results/`
