@@ -23,7 +23,7 @@ This project implements and analyses Particle Swarm Optimization (PSO) across cl
    ```powershell
    python -m jupyter lab
    ```
-4. **Run `pso_analysis.ipynb` top-to-bottom.** Each section is self-contained; use `Kernel > Restart & Run All` to reproduce the published results.
+4. **Run the master pipeline cell (`MASTER PIPELINE - RUN ALL`).** It rebuilds the experiment CSVs, regenerates figures, and recomputes summaries; use `Kernel > Restart & Run All` if you need a clean rerun.
 
 The experiments were executed with Python 3.10 on Windows 10. Matching these versions will avoid API differences, but any recent Python 3.9+ environment should work.
 
@@ -33,13 +33,13 @@ The experiments were executed with Python 3.10 on Windows 10. Matching these ver
 - **Section 2 — PSO Implementation:** Global-best PSO with inertia weight, cognitive/social terms, velocity clamping, and reproducible RNG streams.
 - **Section 3 — Experimental Design:** Configuration of the full sweep (4 functions × 3 dimensions × 30 runs = 360 experiments) and helper utilities for data collection.
 - **Section 4 — Performance Results:** Aggregated tables, convergence curves, success-rate heatmaps, and bar charts exported to `results/`.
-- **Section 5 — Convergence Patterns:** Qualitative analysis of representative fitness trajectories.
-- **Section 6 — Stability Metrics:** Variance analysis to quantify consistency across runs.
+- **Section 5 — Convergence & Stability:** Convergence trajectories plus variance analysis across runs.
+- **Section 6 — PSO Variants Comparison:** Parameter sweep (ω, c₁, c₂) and gbest vs lbest topology study with saved CSV summaries.
 - **Section 7 — Conclusions:** Written synthesis of findings plus links to generated CSV/PNG artefacts.
 
 ## Key Results
 
-- **Overall throughput:** 360 experiments completed with an average runtime ≈1–2 seconds per run; raw logs are stored in `results/pso_experiments_detailed.csv`.
+- **Baseline throughput:** 360 experiments completed with an average runtime ≈1–2 seconds per run; raw logs are stored in `results/pso_experiments_detailed.csv`.
 - **Success by function (global optimum reached ≥ 1e-6 tolerance):**
   - Sphere: **96.7%**
   - Ackley: **66.7%**
@@ -51,13 +51,14 @@ The experiments were executed with Python 3.10 on Windows 10. Matching these ver
   - 30D: **22.5%**
 - **Convergence behaviour:** Successful runs typically converged within 30–270 iterations; stalled runs plateaued early, especially on Rosenbrock and Rastrigin.
 - **Stability:** Sphere exhibited the lowest variance across runs, while multimodal functions showed high dispersion, underscoring the importance of multiple trials.
+- **Variants:** Parameter and topology sweeps are summarised in `results/pso_param_summary.csv` and `results/pso_topology_summary.csv`; the default configuration remains the most reliable overall.
 
 Refer to `results/performance_heatmaps.png` and `results/convergence_curves_all.png` for the visual evidence supporting these metrics.
 
 ## Reproducing the Study
 
 1. Execute Sections 1–3 to rebuild the PSO implementation and experiment scaffolding.
-2. Run the master experiment cell in Section 4; progress logs appear every dimension block, and refreshed CSV/PNG outputs land in `results/`.
+2. Run the master pipeline cell in Section 4; progress logs appear every dimension block, and refreshed CSV/PNG outputs land in `results/`.
 3. Use the summarisation cells in Sections 4–6 to regenerate tables, plots, and descriptive text.
 4. Review Section 7 for the automatically generated narrative summary; adjust parameters or add new benchmarks as needed.
 
