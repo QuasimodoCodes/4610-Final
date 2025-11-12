@@ -160,27 +160,36 @@
     {
       "step_number": 4,
       "description": "Analyze results, generate visualizations, and compute statistics",
-      "status": "pending",
+      "status": "complete",
+      "completed_date": "2025-11-07",
       "substeps": [
         {
           "substep": "4.1",
           "description": "Generate convergence curves (log-scale y-axis) for each function × dimension",
-          "status": "pending"
+          "status": "complete",
+          "completed_date": "2025-11-07",
+          "verification": "4×3 grid of convergence plots with mean±std bands saved to convergence_curves_all.png (300 DPI)"
         },
         {
           "substep": "4.2",
           "description": "Calculate summary statistics: mean, median, best, worst, std, success rate (threshold-based)",
-          "status": "pending"
+          "status": "complete",
+          "completed_date": "2025-11-07",
+          "verification": "Comprehensive statistics computed for all 12 configurations, saved to pso_summary_statistics.csv"
         },
         {
           "substep": "4.3",
           "description": "Create performance summary table comparing all configurations",
-          "status": "pending"
+          "status": "complete",
+          "completed_date": "2025-11-07",
+          "verification": "Performance heatmaps (success rate + mean fitness) and bar charts generated, saved to performance_heatmaps.png and performance_bar_charts.png"
         },
         {
           "substep": "4.4",
           "description": "Analyze and discuss: convergence speed, difficulty patterns, stability across runs",
-          "status": "pending"
+          "status": "complete",
+          "completed_date": "2025-11-07",
+          "verification": "Complete analysis with convergence speed, difficulty ranking, dimensionality impact, stability analysis, and key findings displayed"
         }
       ]
     },
