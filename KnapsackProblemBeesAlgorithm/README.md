@@ -12,7 +12,7 @@ This repository contains an all-in-one Jupyter notebook implementing the **Bees 
 
 ## Repository Layout
 
-- `BA_Knapsack_test.ipynb` — main notebook with all code, experiments, and plots.
+- `BA_Knapsack.ipynb` — main notebook with all code, experiments, and plots.
 - `requirements.txt` — Python dependencies for reproducing the notebook (recommended).
 - `DATA/` — **not tracked**. Folder where benchmark instances should be placed (see below).
 - `results/` — created automatically; stores summary CSVs and any tables exported from the notebook.
